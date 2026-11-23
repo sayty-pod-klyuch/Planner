@@ -629,7 +629,7 @@ const T = {
   home:['Главная','Baş sahypa'], catalog:['Каталог','Katalog'], post:['Подать','Goş'], favs:['Избранное','Halanlarym'], profile:['Профиль','Profil'],
   searchPh:['Поиск','Gözleg'],
   s_cars:['Авто','Awtoulaglar'], s_import:['Из-за рубежа','Daşary ýurtdan'], s_parts:['Запчасти','Şaýlar'], s_tech:['Техника и услуги','Tehnika we hyzmatlar'],
-  s_moto:['Мотоциклы','Motosikller'], s_jobs:['Работа водителям','Sürüjiler üçin iş'], s_rent:['Аренда','Arenda'], s_sto:['Сервисы','Awtohyzmat'], s_all:['Все объявления','Ähli bildirişler'],
+  s_moto:['Мотоцикл','Motosikl'], s_jobs:['Работа водителям','Sürüjiler üçin iş'], s_rent:['Аренда','Arenda'], s_sto:['Сервисы','Awtohyzmat'], s_all:['Все объявления','Ähli bildirişler'],
   heroT:['Машины, техника и работа — в одном месте','Maşynlar, tehnika we iş — bir ýerde'],
   heroP:['Первое объявление — бесплатно на 7 дней','Ilkinji bildiriş — 7 gün mugt'],
   heroFree:['Подайте объявление за пару минут','Bildirişiňizi birnäçe minutda goşuň'],
@@ -812,7 +812,7 @@ const CATALOG = {
   }
 };
 // Мотоциклы: отдельная группа, у Honda, Suzuki и других здесь свои модели
-CATALOG['Мото'] = {
+CATALOG['Мотоцикл'] = {
   'Honda':['CB125F','CB300R','CB500F','CB650R','CBR600RR','CBR650R','CBR1000RR','CRF250L','CRF300L','CRF450R','Africa Twin','NC750X','Gold Wing','Rebel 500','Dio','PCX 125','Activa'],
   'Yamaha':['YBR 125','MT-03','MT-07','MT-09','YZF-R3','YZF-R6','YZF-R7','YZF-R1','XT250','WR250F','YZ450F','Tenere 700','Tracer 9','NMAX','XMAX','Aerox'],
   'Suzuki':['GN125','GSX-R600','GSX-R1000','GSX-S750','GSX-8S','V-Strom 650','V-Strom 800','DR-Z400','Hayabusa','Burgman'],
@@ -852,7 +852,7 @@ CATALOG['Мото'] = {
   'ИЖ':['Планета 5','Юпитер 5'],
   'Днепр':['МТ-11','МТ-16']
 };
-const BRAND_GROUPS = { moto:['Мото'], cars:['Легковые','Грузовые'], import:['Легковые','Грузовые'], rent:['Легковые'], tech:['Грузовые','Спецтехника'], parts:['Легковые','Грузовые','Спецтехника'] };
+const BRAND_GROUPS = { moto:['Мотоцикл'], cars:['Легковые','Грузовые'], import:['Легковые','Грузовые'], rent:['Легковые'], tech:['Грузовые','Спецтехника'], parts:['Легковые','Грузовые','Спецтехника'] };
 const modelsOf = (brand, sec) => { for (const g of [...(BRAND_GROUPS[sec]||[]), ...Object.keys(CATALOG)]) if (CATALOG[g][brand]) return CATALOG[g][brand]; return []; };
 const ALL_BRANDS = Object.values(CATALOG).flatMap(g=>Object.keys(g));
 

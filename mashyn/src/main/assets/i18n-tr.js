@@ -1263,7 +1263,6 @@ const TR_TK = {
   'Тип':'Tür',
   'Объём':'Silindir hacmi',
   'Объём, см³':'Motor hacmi, cc',
-  'Мото':'Moto',
   'Мотоцикл':'Motosiklet',
   'Скутер / мопед':'Scooter / moped',
   'Эндуро / кросс':'Enduro / motokros',
