@@ -48,6 +48,9 @@ public class MainActivity extends Activity {
             });
         }
         setContentView(root);
+        if (android.os.Build.VERSION.SDK_INT >= 33)
+            getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
+                    android.window.OnBackInvokedDispatcher.PRIORITY_DEFAULT, this::handleBack);
 
         WebSettings s = webView.getSettings();
         s.setJavaScriptEnabled(true);
@@ -216,13 +219,28 @@ public class MainActivity extends Activity {
         fileCallback = null;
     }
 
-    @Override
-    public void onBackPressed() {
-        // «Назад» сначала закрывает окна и экраны внутри приложения
-        webView.evaluateJavascript("(window.mbBack && window.mbBack()) ? 'yes' : 'no'", value -> {
-            if (!"\"yes\"".equals(value)) MainActivity.super.onBackPressed();
+    /* NAZAD-2026-11 */
+    // «Назад»: Android 16 не вызывает onBackPressed у приложений под новый targetSdk —
+    // поэтому ловим через OnBackInvokedCallback. Решает страница (mbBack); не решила — спрашиваем «Выйти?».
+    private void handleBack() {
+        if (webView == null) { askExit(); return; }
+        webView.evaluateJavascript("(function(){try{return window.mbBack&&window.mbBack()?1:0}catch(e){return 0}})()", res -> {
+            if (!"1".equals(res)) { askExit(); }
         });
     }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public void onBackPressed() { handleBack(); }   // Android 12 и старше
+
+    private void askExit() {
+        new android.app.AlertDialog.Builder(this)
+                .setTitle("Выйти из приложения?")
+                .setNegativeButton("Нет", null)
+                .setPositiveButton("Да", (d, w) -> finish())
+                .show();
+    }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
